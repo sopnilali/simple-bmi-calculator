@@ -11,12 +11,34 @@ const handleCalulate = (e)=> {
     const newFeets = parseInt(feets.value)
     const newInches = parseInt(inches.value)
     const newWeight = parseInt(weight.value)
+    
     const newHeight = (newFeets * 12) + newInches;
+    console.log(newHeight);
+    
+   
     const heightInMeters = newHeight * 0.0254;
-    const bmi = newWeight / (heightInMeters ** 2);
-    score.classList.remove('hidden');
-    score.textContent = `${bmi.toFixed(2)}`;
-    // saveBMIToLocalStorage(bmi);
+    console.log(heightInMeters);
+    const bmi = newWeight / (heightInMeters ** 2).toFixed(2);
+
+    if(bmi < 18.6){
+        score.classList.remove('hidden');
+        score.textContent = `Under Weight: ${bmi.toFixed(2)}`;
+    }
+    else if(bmi >= 18.6 && bmi < 24.9){
+        score.classList.remove('hidden');
+        score.textContent = `Normal Weight: ${bmi.toFixed(2)}`;
+    }
+    else if(bmi >= 25 && bmi < 29.9){
+        score.classList.remove('hidden');
+        score.textContent = `Over Weight: ${bmi.toFixed(2)}`;
+    }
+    else {
+        score.classList.remove('hidden');
+        score.textContent = `Extreme Obesity: ${bmi.toFixed(2)}`;
+    }
+    
+
+
 }
 
 button.addEventListener('click', handleCalulate);
