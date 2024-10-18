@@ -4,6 +4,7 @@ const inches = document.getElementById('inches');
 const weight = document.getElementById('weight');
 const button = document.getElementById('button');
 const score = document.getElementById('score');
+const error = document.getElementById('error');
 
 
 const handleCalulate = (e)=> {
@@ -11,28 +12,31 @@ const handleCalulate = (e)=> {
     const newFeets = parseInt(feets.value)
     const newInches = parseInt(inches.value)
     const newWeight = parseInt(weight.value)
+
     
     const newHeight = (newFeets * 12) + newInches;
     console.log(newHeight);
-    
-   
     const heightInMeters = newHeight * 0.0254;
-    console.log(heightInMeters);
-    const bmi = newWeight / (heightInMeters ** 2).toFixed(2);
+
+    const bmi = newWeight / (heightInMeters ** 2);
 
     if(bmi < 18.6){
+        error.textContent = ''
         score.classList.remove('hidden');
         score.textContent = `Under Weight: ${bmi.toFixed(2)}`;
     }
     else if(bmi >= 18.6 && bmi < 24.9){
+        error.textContent = ''
         score.classList.remove('hidden');
         score.textContent = `Normal Weight: ${bmi.toFixed(2)}`;
     }
     else if(bmi >= 25 && bmi < 29.9){
+        error.textContent = ''
         score.classList.remove('hidden');
         score.textContent = `Over Weight: ${bmi.toFixed(2)}`;
     }
     else {
+        error.textContent = ''
         score.classList.remove('hidden');
         score.textContent = `Extreme Obesity: ${bmi.toFixed(2)}`;
     }
